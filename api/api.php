@@ -8,7 +8,6 @@ require 'db.php';
 require 'subject.php';
 require 'quiz.php';
 require 'exam.php';
-require 'member.php';
 require 'memberanswer.php';
 require 'user.php';
 require 'ranking.php';
@@ -29,12 +28,6 @@ $app->group('/Quiz', function () use ($app) {
 $app->group('/Exam', function () use ($app) {
     $app->get('/exams', 'getExams');
     $app->get('/quiz/{id}/exam', 'getExamsByQuizID');
-});
-//Member
-$app->group('/Member', function () use ($app) {
-    $app->get('/members', 'getMembers');
-    $app->get('/member/{id}', 'getMember');
-    $app->post('/member', 'addMember');
 });
 //Member Answer
 $app->group('/MemberAnswer', function () use ($app) {
