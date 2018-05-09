@@ -91,6 +91,10 @@
     background-color: #cd7f32;
     }
 
+    #font {
+    	font-size: 18px;
+    }
+
     </style>
 </head>
 <body>
@@ -107,68 +111,101 @@
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
             <?php if (!isset($this->session->userdata['logged_in'])) { ?>
-                <li><a href="<?php echo base_url() . "user_authentication/register";?>"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
+                <li><a href="<?php echo base_url() . "user_authentication/register";?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                 <li><a href="<?php echo base_url() . "user_authentication/login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <?php }else {?>
-                <li><a href="#"><span class="glyphicon glyphicon-edit"></span><?php echo $username ?></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo $username ?></a></li>
                 <li><a href="<?php echo base_url() . "user_authentication/logout"; ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             <?php } ?>
             </ul>
             </div>
         </div>
     </nav>
-    เฉลยข้อสอบ
-    <table border='1'>
-        <tr>
-            <td>ข้อสอบชุดที่</td>
-            <td>ข้อสอบข้อที่</td>
-            <td>คำถาม</td>
-            <td>เฉลย</td>
-            <td>คำตอบของ member</td>
-            <td>ถูกหรือผิด</td>
-        </tr>
-        <tr>
-    <?php 
 
-    foreach($api_exam as $value){
-        echo '<td>' . $value['quiz_id'] . '</td>';
-        //$exam_number_answer[] = $value['exam_number'];
-        echo '<td>' . $value['exam_number'] . '</td>';
-        echo '<td>' . $value['exam_question'] . '</td>';
-        echo '<td>' . $value['exam_correct'] . '</td>';
-        foreach($api_memberanswer as $row){
-            if($value['exam_number'] == $row['exam_number']){
-                echo $row['member_answer'] . ' ';
-                if($value['exam_correct'] == $row['member_answer']){
-                    echo '/';
-                }else{
-                    echo 'X';
+    <div class="container">
+        <h2>เฉลยข้อสอบ</h2>
+        <div class="well">
+            <?php 
+                foreach($api_quiz as $i => $value){
+                    echo '<h3>' . $value['quiz_name'] . '</h3>';
+                    foreach($api_memberanswer as $j => $row){
+                        if($value['quiz_id'] == $row['quiz_id']){
+                            echo '<p id="font"><b>' . 'ข้อที่' . '</b>' . $row['exam_number'] . ' ' . $row['exam_question'] . '</p>';
+                            if($row['exam_answer1'] == $row['exam_correct']){
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer1'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer2'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer3'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer4'] . '<br><br>';
+                                echo '</div>';
+                            }else if($row['exam_answer2'] == $row['exam_correct']){
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer1'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer2'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer3'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer4'] . '<br><br>';
+                                echo '</div>';
+                            }else if($row['exam_answer3'] == $row['exam_correct']){
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer1'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer2'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer3'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer4'] . '<br><br>';
+                                echo '</div>';
+                            }else if($row['exam_answer4'] == $row['exam_correct']){
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer1'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer2'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" >' . ' ' . $row['exam_answer3'];
+                                echo '</div>';
+
+                                echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer4'] . '<br><br>';
+                                echo '</div>';
+                            }
+                            
+
+                        }
+                        
+                    }
                 }
-            }
-        }
-        
-        echo '<br>';
-    }
-    /*
-    echo '<br>';
-    foreach($api_memberanswer as $value){
-        foreach($api_exam as $row){
-            if($value['exam_number'] == $row['exam_number']){
-                echo $row['exam_number'] . ' ';
-                echo $row['exam_question'] . ' ';
-                echo $value['member_answer'] . ' ';
-                echo $value['exam_correct'] . ' ';
-                if($value['member_answer'] == $value['exam_correct']){
-                    echo '/';
-                }else{
-                    echo 'X';
-                }
-                echo '<br>';
-            }
-        }
-    }
-    */
-    ?>
-    </table>
+                
+            ?>
+        </div>
+    </div>
+
 </body>
 </html>

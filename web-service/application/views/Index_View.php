@@ -77,7 +77,7 @@ if (isset($this->session->userdata['logged_in'])) {
                     <li><a href="<?php echo base_url() . "user_authentication/register"; ?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 			        <li><a href="<?php echo base_url() . "user_authentication/login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <?php } else { ?>
-                    <li><a href="#"><span class="glyphicon glyphicon-edit"></span><?php echo $username ?></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username ?></a></li>
 			        <li><a href="<?php echo base_url() . "user_authentication/logout"; ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 <?php } ?>
                 </ul>
