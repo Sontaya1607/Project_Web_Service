@@ -6,12 +6,12 @@
 <body>
 	<table border=1>
 		<tr>
-			<td>กรุณาเลือกชุดข้อสอบ</td>
+			<td>เลือกระดับแบบทดสอบ</td>
 		</tr>
-		<?php foreach ($subject as $row) { ?>
+		<?php foreach ($api as $i => $value) { ?>
 		<tr>
 			<td>
-				<a href="<?php echo base_url();?>examination/doexam/<?php echo $row['quiz_id']; ?>"><?php echo $row['quiz_name']; ?></a>
+				<a href="<?php echo base_url();?>examination/examination/<?php echo $value['subject_id']; ?>"><?php echo $value['subject_name']; ?></a>
 			</td>
 		</tr>
 		<?php } ?>
