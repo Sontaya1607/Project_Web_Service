@@ -118,26 +118,19 @@ class Examination extends CI_Controller {
 	}
 
 	public function answer(){
-		if($quiz_id = $this->uri->segment(3)){
-			if (isset($this->session->userdata['logged_in'])) {
-				$id = ($this->session->userdata['logged_in']['member_id']);
-				$username = ($this->session->userdata['logged_in']['member_username']);
-			}
-			//echo $id . ' ' . $username;
-
-			$url = 'http://13.229.115.177/api/api.php/MemberAnswer/member/'.$id.'/quiz/'.$quiz_id.'/memanswer';
+		if(isset($this->session->userdata['logged_in'])){
+			$member_id = ($this->session->userdata['logged_in']['member_id']);
+			$url = 'http://13.229.115.177/api/api.php/Answer/answer/member/'.$member_id;
 			$subject_json = file_get_contents($url);
 			$subject_array = json_decode($subject_json, true);
 			$data['api_memberanswer'] = $subject_array['result'];
 
-			$uri = 'http://13.229.115.177/api/api.php/Exam/quiz/'.$quiz_id.'/exam';
+			$uri = 'http://13.229.115.177/api/api.php/Quiz/quizs';
 			$subject_json1 = file_get_contents($uri);
 			$subject_array1 = json_decode($subject_json1, true);
-			$data['api_exam'] = $subject_array1['result'];
+			$data['api_quiz'] = $subject_array1['result'];
 
 			$this->load->view('Answer_View',$data);
-
-		}else{
 
 		}
 	}
