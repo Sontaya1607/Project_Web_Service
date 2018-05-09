@@ -109,10 +109,10 @@ if(empty($api)) {
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
             <?php if (!isset($this->session->userdata['logged_in'])) { ?>
-                <li><a href="<?php echo base_url() . "user_authentication/register";?>"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
+                <li><a href="<?php echo base_url() . "user_authentication/register";?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                 <li><a href="<?php echo base_url() . "user_authentication/login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <?php }else {?>
-                <li><a href="#"><span class="glyphicon glyphicon-edit"></span><?php echo $username ?></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo $username ?></a></li>
                 <li><a href="<?php echo base_url() . "user_authentication/logout"; ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             <?php } ?>
             </ul>
@@ -121,18 +121,53 @@ if(empty($api)) {
     </nav>
 	<center>
 
-	<table border=1>
-		<tr>
-			<td>กรุณาเลือกชุดข้อสอบ</td>
-		</tr>
-		<?php foreach ($api as $value) { ?>
-		<tr>
-			<td>
-				<a href="<?php echo base_url();?>examination/doexam/<?php echo $value['quiz_id']; ?>"><?php echo $value['quiz_name']; ?></a>
-			</td>
-		</tr>
-		<?php } ?>
-	</table>
+		<?php foreach ($api as $value) {
+            if($value['subject_id'] == 1){
+                header("location:" . base_url());
+            }else if($value['subject_id'] == 2){
+                $id = 'Big English 1.jpg';
+                $name = 'I';
+                $quiz = array('2','3','4');
+            }else if($value['subject_id'] == 3){
+                $id = 'Big English 2.jpg';
+                $quiz = array('5','6','7');
+                $name = 'II';
+            }else if($value['subject_id'] == 4){
+                $id = 'Big English 3.jpg';
+                $quiz = array('8','9','10');
+                $name = 'III';
+            }
+        }?>
+	</center>
+    <?php //echo $id ;echo $quiz[0]; echo $quiz[1]; echo $quiz[2];?>
+    <center> <br>
+		<h3><u> กรุณาเลือกชุดข้อสอบ </u></h3> <br>
+		<div class="row text-center">
+			<div class="col-sm-4 col-centered">
+				<div class="thumbnail">
+				<img src="http://deknerd.informatics.buu.ac.th/887350/58160197/WebserviceProjectTest/<?php echo $id ?>" alt="English I">
+				<p><strong>English <?php echo $name ?> ชุด 1</strong></p>
+				<p>Sat. 5 May 2018</p>
+				<a href="<?php echo base_url();?>examination/doexam/2" class="btn" role="button">Click</a>
+				</div>
+			</div>
+			<div class="col-sm-4 col-centered">
+				<div class="thumbnail">
+				<img src="http://deknerd.informatics.buu.ac.th/887350/58160197/WebserviceProjectTest/<?php echo $id ?>" alt="English II" >
+				<p><strong>English <?php echo $name ?> ชุด 2</strong></p>
+				<p>Sun. 6 May 2018</p>
+				<a href="<?php echo base_url();?>examination/doexam/3" class="btn" role="button">Click</a>
+				</div>
+			</div>
+			<div class="col-sm-4 col-centered" >
+				<div class="thumbnail">
+				<img src="http://deknerd.informatics.buu.ac.th/887350/58160197/WebserviceProjectTest/<?php echo $id ?>" alt="English III">
+				<p><strong>English <?php echo $name ?> ชุด 3</strong></p>
+				<p>Mon. 7 May 2018</p>
+				<a href="<?php echo base_url();?>examination/doexam/4" class="btn" role="button">Click</a>
+				</div>
+			</div>
+		</div>
 	</center>
 </body>
 </html>

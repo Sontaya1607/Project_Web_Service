@@ -1,7 +1,9 @@
-<?php 
+<?php
+    /* 
 	if (isset($this->session->userdata['logged_in'])) {
 		header("location: " . base_url());
 	}
+    */
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,14 +14,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 	/* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
         background-color: #000000;
         margin-bottom: 0;
         border-radius: 0;
-    }
 
+    }
+    .navbar-brand {
+        color: #FFFFFF;
+    }
     
     /* Add a gray background color and some padding to the footer */
     footer {
@@ -31,15 +37,14 @@
         -webkit-filter: grayscale(10%);
         filter: grayscale(10%); /* make all photos black and white */ 
         width: 100%;
-
         margin: auto;
-        
+      
     }
 
     /* Hide the carousel text when the screen is less than 600 pixels wide */
     @media (max-width: 600px) {
         .carousel-caption {
-        display: none; 
+            display: none; 
         }
     }
 
@@ -59,33 +64,59 @@
         color: #000;
     }
 
-    .col-sm-4 {
+    * {box-sizing: border-box}
 
-    width: 20%;
-    }
-    .col-centered{
-    display: block;
-    margin-left: 10%;
-    margin-right: auto;
-    text-align: center;
+    /* Add padding to containers */
+    .container {
+        padding: 16px;
     }
 
-    .Rank-topic {
-    background-color: #000000; 
-    color: #FFFFFF;
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
     }
 
-    .goldrank {
-    background-color: #ffd700;
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
     }
 
-    .silverrank {
-    background-color: #c0c0c0;
-
+    /* Overwrite default styles of hr */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
     }
 
-    .bronzerank {
-    background-color: #cd7f32;
+    /* Set a style for the submit/register button */
+    .registerbtn {
+        background-color: #000000;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .registerbtn:hover {
+        opacity:1;
+    }
+
+    /* Add a blue text color to links */
+    a {
+        color: dodgerblue;
+    }
+
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+        background-color: #f1f1f1;
+        text-align: center;
     }
 
     </style>
@@ -104,7 +135,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
             <?php if (!isset($this->session->userdata['logged_in'])) { ?>
-                <li><a href="<?php echo base_url() . "user_authentication/register";?>"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
+                <li><a href="<?php echo base_url() . "user_authentication/register";?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
                 <li><a href="<?php echo base_url() . "user_authentication/login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <?php }else {?>
                 <li><a href="#"><span class="glyphicon glyphicon-edit"></span><?php echo $username ?></a></li>
@@ -115,30 +146,31 @@
         </div>
     </nav>
 
-    <h2>Registration Form</h2><br>
+    <center><h1>Register</h1></center>
     <?php
 		echo "<div class='error_msg'>";
-		echo validation_errors();
+		echo "<center><font  color='red' size='4'>" . validation_errors() . "</font></center>";
         echo "</div>";
-        
+        echo "<div class='container'>";
 		echo form_open(base_url().'user_authentication/new_user_registration');
-        // --------- username ---------
-        echo "<label>Username:</label>";        
-        $data = array(
-			'type' => 'text',
-			'name' => 'username',
-			'placeholder' => 'Create Username'
-		);
-                        
-        echo form_input($data);
 
 		echo "<div class='error_msg'>";
 			if (isset($message_display)) {
 				echo $message_display;
 			}
 	    echo "</div>";
+        echo "<hr>";
+        // --------- username ---------
+        echo "<label for='username'><i class='fa fa-user'></i><b>   Username</b></label>";        
+        $data = array(
+            'type' => 'text',
+            'name' => 'username',
+            'placeholder' => 'Create Username'
+        );
+                        
+        echo form_input($data);
         // --------- firstname ---------
-        
+        echo "<label for='firstname'><i class='fa fa-id-card'></i><b>   Firstname</b></label>";
         $data = array(
 			'type' => 'text',
 			'name' => 'firstname',
@@ -147,7 +179,7 @@
         
         echo form_input($data);
         // --------- lastname ---------
-                        
+        echo "<label for='lastname'><i class='fa fa-id-card'></i><b>   Lastname</b></label>";                
         $data = array(
 			'type' => 'text',
 			'name' => 'lastname',
@@ -156,16 +188,16 @@
         
         echo form_input($data);
         // --------- email ---------
-        
+        echo "<label for='email'> <i class='fa fa-envelope'></i><b>   Email</b></label>";
         $data = array(
-			'type' => 'email',
+			'type' => 'text',
 			'name' => 'email_value',
 			'placeholder' => 'Email'
 		);
         
         echo form_input($data);
         // --------- password ---------
-        
+        echo "<label for='psw'><i class='fa fa-lock'></i><b>   Password</b></label>";
         $data = array(
 			'class' => 'input-field',
 		    'type' => 'password',
@@ -175,7 +207,7 @@
         
         echo form_input($data);
         // --------- confirm_password ---------
-        
+        echo "<label for='psw-repeat'><i class='fa fa-lock'></i><b>   Confirm Password</b></label>";
         $data = array(
 			'type' => 'password',
 			'name' => 'confirm_password',
@@ -185,13 +217,15 @@
         echo form_input($data);
         // --------- submit ---------
 		$btn = array(
+            'class' => 'registerbtn',
 			'type' => 'submit',
 			'name' => 'submit',
 			'value' => 'Sign Up'
 		);
-                        
+        echo "<hr>";   
         echo form_submit($btn);
         echo form_close();
+        echo "</div>"; 
 	?>
 </body>
 </html>
