@@ -1,24 +1,22 @@
 <?php
-if (isset($this->session->userdata['logged_in'])) {
-	$id = ($this->session->userdata['logged_in']['member_id']);
-	$username = ($this->session->userdata['logged_in']['member_username']);
-	//echo $username;
-}
-if(empty($api)) {
-    header("location:" . base_url());
-}
+    if (isset($this->session->userdata['logged_in'])) {
+        $id = ($this->session->userdata['logged_in']['member_id']);
+        $username = ($this->session->userdata['logged_in']['member_username']);
+    }else if(!isset($this->session->userdata['logged_in'])){
+        header("location:" . base_url());
+    }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Quiz</title>
-	<meta charset="utf-8">
+    <title>Answer</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-	/* Remove the navbar's default margin-bottom and rounded borders */ 
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
         background-color: #000000;
         margin-bottom: 0;
@@ -96,7 +94,7 @@ if(empty($api)) {
     </style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -119,20 +117,58 @@ if(empty($api)) {
             </div>
         </div>
     </nav>
-	<center>
+    เฉลยข้อสอบ
+    <table border='1'>
+        <tr>
+            <td>ข้อสอบชุดที่</td>
+            <td>ข้อสอบข้อที่</td>
+            <td>คำถาม</td>
+            <td>เฉลย</td>
+            <td>คำตอบของ member</td>
+            <td>ถูกหรือผิด</td>
+        </tr>
+        <tr>
+    <?php 
 
-	<table border=1>
-		<tr>
-			<td>กรุณาเลือกชุดข้อสอบ</td>
-		</tr>
-		<?php foreach ($api as $value) { ?>
-		<tr>
-			<td>
-				<a href="<?php echo base_url();?>examination/doexam/<?php echo $value['quiz_id']; ?>"><?php echo $value['quiz_name']; ?></a>
-			</td>
-		</tr>
-		<?php } ?>
-	</table>
-	</center>
+    foreach($api_exam as $value){
+        echo '<td>' . $value['quiz_id'] . '</td>';
+        //$exam_number_answer[] = $value['exam_number'];
+        echo '<td>' . $value['exam_number'] . '</td>';
+        echo '<td>' . $value['exam_question'] . '</td>';
+        echo '<td>' . $value['exam_correct'] . '</td>';
+        foreach($api_memberanswer as $row){
+            if($value['exam_number'] == $row['exam_number']){
+                echo $row['member_answer'] . ' ';
+                if($value['exam_correct'] == $row['member_answer']){
+                    echo '/';
+                }else{
+                    echo 'X';
+                }
+            }
+        }
+        
+        echo '<br>';
+    }
+    /*
+    echo '<br>';
+    foreach($api_memberanswer as $value){
+        foreach($api_exam as $row){
+            if($value['exam_number'] == $row['exam_number']){
+                echo $row['exam_number'] . ' ';
+                echo $row['exam_question'] . ' ';
+                echo $value['member_answer'] . ' ';
+                echo $value['exam_correct'] . ' ';
+                if($value['member_answer'] == $value['exam_correct']){
+                    echo '/';
+                }else{
+                    echo 'X';
+                }
+                echo '<br>';
+            }
+        }
+    }
+    */
+    ?>
+    </table>
 </body>
 </html>
