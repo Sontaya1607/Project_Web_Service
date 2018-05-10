@@ -11,8 +11,9 @@ require 'exam.php';
 require 'memberanswer.php';
 require 'user.php';
 require 'ranking.php';
+require 'answer.php';
  
-$app = new \Slim\App();
+$app = new \Slim\App;
 //Routes
 //Subject
 $app->group('/Subject', function () use ($app) {
@@ -47,6 +48,10 @@ $app->group('/Ranking', function () use ($app) {
     $app->get('/rankings', 'getRankings');
     $app->get('/member/{id1}/quiz/{id2}/ranking', 'getRankingByID');
     $app->post('/member/{id1}/quiz/{id2}/ranking', 'addRankingByID');
+});
+//Answer
+$app->group('/Answer', function () use ($app) {
+    $app->get('/answer/member/{id1}', 'getAnswerByID');
 });
 
 $corsOptions = array(

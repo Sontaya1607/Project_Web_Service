@@ -1,6 +1,6 @@
 <?php
 function getExams($request, $response) {
-    $sql = "SELECT * FROM exam";
+    $sql = "SELECT * FROM exams";
     try {
         $db = getConnection();
 

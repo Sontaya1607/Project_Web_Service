@@ -6,7 +6,7 @@ function getRankings($request, $response) {
                       ON r.member_id = m.member_id
                     INNER JOIN quiz q
                       ON r.quiz_id = q.quiz_id
-		      ORDER BY q.quiz_id ASC , r.score DESC LIMIT 15";
+                      ORDER BY q.quiz_id ASC , r.score DESC LIMIT 15";
     try {
         $db = getConnection();
 
