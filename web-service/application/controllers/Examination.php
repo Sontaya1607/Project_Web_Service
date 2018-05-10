@@ -42,18 +42,30 @@ class Examination extends CI_Controller {
 
 		if($quiz_id = $this->uri->segment(3)){
 			$number = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+			shuffle($number);
+			//print_r ($number);
+			
 			$co = count($number);
 			
 			$number2 = array();
 
 			for($i = 0 ; $i >= 0 ;$i++){
+				//echo(rand(1,20));
 				//echo $number[$i];
 				$co2 = count($number2);
 				if($co2 == 10){
 					break;
 				}
 				$count = 0;
-				$random = random_int(1, 20);
+				//$random = random_int(1, 20);
+				$random = rand(1,20);
+				//echo $random;
+
+				//$number3[] = $random;
+				
+				//if(count($number3) == 20){
+				//	break;
+				//}
 				for($j = 0 ; $j < $co2 ; $j++){
 					if($number2[$j] == $random){
 						$count++;
@@ -63,7 +75,13 @@ class Examination extends CI_Controller {
 				if($count == 0){
 					array_push($number2 , $random);
 				}
-			}	
+			}
+			
+			for($i = 0;$i < 10 ;$i++){
+				$number3[] = $number[$i];
+			}
+
+			//print_r($number3);
 			
 			if($this->input->post('Submit') != NULL){
 				$data = $this->Member_Answer_Model->check_answer($quiz_id);
@@ -85,13 +103,19 @@ class Examination extends CI_Controller {
 					
 			}else{
 				// OK
-				$url = 'http://13.229.115.177/api/api.php/Exam/quiz/'.$quiz_id.'/exam';
+				//$url = 'http://13.229.115.177/api/api.php/Exam/quiz/'.$quiz_id.'/exam';
 
-				$subject_json = file_get_contents($url);
-				$subject_array = json_decode($subject_json, true);
+				//$subject_json = file_get_contents($url);
+				//$subject_array = json_decode($subject_json, true);
 
-				$data['api'] = $subject_array['result'];
-				$data['number'] = $number2;
+				//$data['api'] = $subject_array['result'];
+				//$data['number'] = $number2;
+				$data['number'] = $number3;
+				//$this->load->view('Exam_Data_View',$data);
+
+				//$quiz_id = $this->uri->segment(3);
+				$data['api'] = $this->Quiz_Model->get_quiz_by_id($quiz_id);
+				//$data['subject'] = $this->Quiz_Model->random_exam($quiz_id);
 				$this->load->view('Exam_Data_View',$data);
 			}
 			
@@ -120,19 +144,25 @@ class Examination extends CI_Controller {
 	public function answer(){
 		if(isset($this->session->userdata['logged_in'])){
 			$member_id = ($this->session->userdata['logged_in']['member_id']);
-			$url = 'http://13.229.115.177/api/api.php/Answer/answer/member/'.$member_id;
-			$subject_json = file_get_contents($url);
-			$subject_array = json_decode($subject_json, true);
-			$data['api_memberanswer'] = $subject_array['result'];
+			$data['api_memberanswer'] = $this->Quiz_Model->get_quiz_by_member_id($member_id);
+			//$url = 'http://13.229.115.177/api/api.php/Answer/answer/member/'.$member_id;
+			//$subject_json = file_get_contents($url);
+			//$subject_array = json_decode($subject_json, true);
+			//$data['api_memberanswer'] = $subject_array['result'];
 
-			$uri = 'http://13.229.115.177/api/api.php/Quiz/quizs';
-			$subject_json1 = file_get_contents($uri);
-			$subject_array1 = json_decode($subject_json1, true);
-			$data['api_quiz'] = $subject_array1['result'];
+			//$uri = 'http://13.229.115.177/api/api.php/Quiz/quizs';
+			//$subject_json1 = file_get_contents($uri);
+			//$subject_array1 = json_decode($subject_json1, true);
+			$data['api_quiz'] = $this->Quiz_Model->get_quiz_all();
+			//$data['api_quiz'] = $subject_array1['result'];
 
 			$this->load->view('Answer_View',$data);
 
 		}
+	}
+	public function location()
+	{
+		$this->load->view('location_View');
 	}
 	
 }

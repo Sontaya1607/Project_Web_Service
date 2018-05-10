@@ -66,7 +66,7 @@ class Member_Answer_Model extends CI_Model {
 	}
 	// 2
 	public function ranking($member_id,$quiz_id,$score){
-
+		$this->db->where('quiz_id', $quiz_id);
 		$result = $this->db->get('ranking');
 		if($result->num_rows() == 0){
 			$data = array(

@@ -113,4 +113,12 @@ class User_authentication extends CI_Controller {
         $this->load->view('Login_Form_View', $data);
     }
 
+    public function facebook(){
+        $this->load->view('Login_Facebook_View');
+    }
+
+    public function data(){
+        $this->load->view('Login_Data_View');
+    }
+
 }
