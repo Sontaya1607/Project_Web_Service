@@ -148,7 +148,7 @@ if(empty($api)) {
 				<img src="http://deknerd.informatics.buu.ac.th/887350/58160197/WebserviceProjectTest/<?php echo $id ?>" alt="English I">
 				<p><strong>English <?php echo $name ?> ชุด 1</strong></p>
 				<p>Sat. 5 May 2018</p>
-				<a href="<?php echo base_url();?>examination/doexam/2" class="btn" role="button">Click</a>
+				<a href="<?php echo base_url();?>examination/doexam/<?php echo $quiz[0]; ?>" class="btn" role="button">Click</a>
 				</div>
 			</div>
 			<div class="col-sm-4 col-centered">
@@ -156,7 +156,7 @@ if(empty($api)) {
 				<img src="http://deknerd.informatics.buu.ac.th/887350/58160197/WebserviceProjectTest/<?php echo $id ?>" alt="English II" >
 				<p><strong>English <?php echo $name ?> ชุด 2</strong></p>
 				<p>Sun. 6 May 2018</p>
-				<a href="<?php echo base_url();?>examination/doexam/3" class="btn" role="button">Click</a>
+				<a href="<?php echo base_url();?>examination/doexam/<?php echo $quiz[1]; ?>" class="btn" role="button">Click</a>
 				</div>
 			</div>
 			<div class="col-sm-4 col-centered" >
@@ -164,7 +164,7 @@ if(empty($api)) {
 				<img src="http://deknerd.informatics.buu.ac.th/887350/58160197/WebserviceProjectTest/<?php echo $id ?>" alt="English III">
 				<p><strong>English <?php echo $name ?> ชุด 3</strong></p>
 				<p>Mon. 7 May 2018</p>
-				<a href="<?php echo base_url();?>examination/doexam/4" class="btn" role="button">Click</a>
+				<a href="<?php echo base_url();?>examination/doexam/<?php echo $quiz[2]; ?>" class="btn" role="button">Click</a>
 				</div>
 			</div>
 		</div>

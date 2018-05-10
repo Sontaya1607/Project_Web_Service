@@ -257,7 +257,7 @@ if (isset($this->session->userdata['logged_in'])) {
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand">BabyEnglish </a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">BabyEnglish</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
