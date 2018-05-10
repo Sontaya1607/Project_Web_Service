@@ -67,12 +67,12 @@ if (isset($this->session->userdata['logged_in'])) {
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand">BabyEnglish </a> <!-- ควยไรแชมป์ จากพี่บ่าว -->
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">BabyEnglish</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Start a free test</a></li>
+                    <li><a href="<?php echo base_url();?>examination/subject/"><span class="glyphicon glyphicon-edit"></span> Start a free test</a></li>
                 <?php if (!isset($this->session->userdata['logged_in'])) { ?>
                     <li><a href="<?php echo base_url() . "user_authentication/register"; ?>"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 			        <li><a href="<?php echo base_url() . "user_authentication/login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -143,13 +143,15 @@ if (isset($this->session->userdata['logged_in'])) {
 
             <div class="col-sm-4">
                 <div class="well">
+                    <!--
                     <a href="<?php echo base_url();?>examination/examination/1" class="btn" role="button">Start a free test</a>
-                    <!-- test exam data -->
+                    -->
                     <a href="<?php echo base_url();?>examination/subject/" class="btn" role="button">Start a free test</a>
                 </div>
 
                 <div class="well">
-                    <a href="<?php echo base_url();?>examination/ranking" class="btn" role="button">Ranking</a>
+                    <a href="<?php echo base_url();?>examination/ranking" class="btn" role="button">Ranking</a>&nbsp;&nbsp;
+                    <a href="<?php echo base_url();?>examination/location" class="btn" role="button">Where to learn</a>
                 </div>
 
             </div>

@@ -3,9 +3,9 @@
 		$id = ($this->session->userdata['logged_in']['member_id']);
 		$username = ($this->session->userdata['logged_in']['member_username']);
 	}
-	if(empty($api)) {
+	/*if(empty($api)) {
 		header("location:" . base_url());
-	}
+	}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,9 +123,14 @@
 	</nav>
 	<br>
 	<?php 
-		foreach ($number as $row) {
-			foreach ($api as $i => $value) {
-				if($row == $value['exam_number']){
+		//echo count($number);
+		//print_r ($number);
+		foreach ($api as $i => $value) {
+		for($i = 0;$i < count($number);$i++){
+		//foreach ($number as $row) {
+			//foreach ($api as $i => $value) {
+				//if($row == $value['exam_number']){
+				if($value['exam_number'] == $number[$i]){
 					$quiz_name = $value['quiz_name'];
 					$exam_number[] = $value['exam_number'];
 					$exam_question[] = $value['exam_question'];
@@ -138,6 +143,7 @@
 		
 		}
 		$count = count($exam_number);
+		//echo $count;
 	?>
 	<?php $id = $this->uri->segment(3)?>
 	<div class="container">
