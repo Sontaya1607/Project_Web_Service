@@ -76,7 +76,7 @@ if (isset($this->session->userdata['logged_in'])) {
 	<nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand">BabyEnglish </a> <!-- ควยไรแชมป์ จากพี่บ่าว -->
+				<a class="navbar-brand" href="<?php echo base_url(); ?>">BabyEnglish</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -93,19 +93,6 @@ if (isset($this->session->userdata['logged_in'])) {
 
         </div>
     </nav>
-
-	<table border=1>
-		<tr>
-			<td>เลือกระดับแบบทดสอบ</td>
-		</tr>
-		<?php foreach ($api as $i => $value) { ?>
-		<tr>
-			<td>
-				<a href="<?php echo base_url();?>examination/examination/<?php echo $value['subject_id']; ?>"><?php echo $value['subject_name']; ?></a>
-			</td>
-		</tr>
-		<?php } ?>
-	</table>
 
 	<center> <br>
 		<h3><u> เลือกระดับแบบทดสอบ </u></h3> <br>
