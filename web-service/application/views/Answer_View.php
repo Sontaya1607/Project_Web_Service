@@ -126,81 +126,23 @@
         <h2>เฉลยข้อสอบ</h2>
         <div class="well">
             <?php 
+                
                 foreach($api_quiz as $i => $value){
                     echo '<h3>' . $value['quiz_name'] . '</h3>';
                     foreach($api_memberanswer as $j => $row){
                         if($value['quiz_id'] == $row['quiz_id']){
-                            echo '<p id="font"><b>' . 'ข้อที่' . '</b>' . $row['exam_number'] . ' ' . $row['exam_question'] . '</p>';
-                            if($row['exam_answer1'] == $row['exam_correct']){
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer1'];
-                                echo '</div>';
+                            //if($row['exam_answer1'] != NULL){
+                            echo '<p id="font"><b>' . 'ข้อที่ ' . '</b>' . $row['exam_number'] . ' ' . $row['exam_question'] . '</p>';
+                                //echo '<div class="col-xs-3 col-md-6">';
+                                    echo '<input type="radio" checked>' . ' ' . $row['exam_correct'];
+                                //echo '</div>';
+                                echo '<br>';
 
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer2'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer3'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer4'] . '<br><br>';
-                                echo '</div>';
-                            }else if($row['exam_answer2'] == $row['exam_correct']){
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer1'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer2'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer3'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer4'] . '<br><br>';
-                                echo '</div>';
-                            }else if($row['exam_answer3'] == $row['exam_correct']){
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer1'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer2'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer3'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer4'] . '<br><br>';
-                                echo '</div>';
-                            }else if($row['exam_answer4'] == $row['exam_correct']){
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer1'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer2'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" >' . ' ' . $row['exam_answer3'];
-                                echo '</div>';
-
-                                echo '<div class="col-xs-3 col-md-6">';
-                                    echo '<input type="radio" checked>' . ' ' . $row['exam_answer4'] . '<br><br>';
-                                echo '</div>';
-                            }
-                            
-
+                                echo $row['exam_reason'];
                         }
                         
                     }
+                    
                 }
                 
             ?>
